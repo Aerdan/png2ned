@@ -3,6 +3,7 @@
 image=$1
 rom=$2
 base=$(basename $image .png)
+rombase=$(basename $rom .gba)
 
 [ -n $rom ] || break
 
@@ -20,4 +21,6 @@ for i in 1 2; do
     ./gba-lz77-compress "${base}$i.bin" "${base}$i.cmp"
 done
 ./insert.py "$rom" "$base"
+mv "$rombase (modified).gba" "$base.gba"
+rm ${base}?.*
 
